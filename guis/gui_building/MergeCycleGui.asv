@@ -1,0 +1,97 @@
+%% Merge the 3 advancedCycleGUI windows
+
+function MergeCycleGui(varargin)
+global gh
+
+f(1) = gh.advancedCycleGui; % Open Cycle Definition GUI Window
+GUI_handle = f(1).figure1;
+S1 = get(f(1).figure1,'Position');
+
+NewWindHandle = openfig([varargin{1},'.fig'],'reuse','invisible');
+%     NewWindHandle = openfig([ varargin,'.fig'],'reuse');
+S2 = get(NewWindHandle,'Position');
+
+% Create New GUI window
+% switch size(get(GUI_handle,'Children'),1) % size(varargin,2)
+%     case 1
+df        Nh = max([S1(3),S2(3)]); Nv = S1(4)+S2(4);
+        Y = Nv-S1(4);
+        
+        set(GUI_handle,'Position',[S1(1) S1(2)  Nh   Nv]); % Resize Current window
+        Pannel_handles = allchild(GUI_handle);
+        for f=size(Pannel_handles,1):-1:1
+            Hposition=get(Pannel_handles(f),'Position');
+            Hposition(f,2) = Hposition(f,2)+Y; % Vertical Shift
+            set(Pannel_handles(f),'Position',Hposition(f,:));
+        end
+        
+        % Place New Pannel
+        PS2 = get(allchild(NewWindHandle),'Position'); % Panel Size
+        uipanel(GUI_handle,'Units','characters','Position',[PS2(1) PS2(2) PS2(3) PS2(4)]);
+        Pannel_handles = allchild(GUI_handle); 
+%         set(GUI_handle,'Position',[S1(1) S1(2)  Nh   Nv]); % Resize Current window
+%         Pannel_handles = allchild(f(1).figure1);
+%         
+%         % Move First Panels to the top
+%         PS1 = get(Pannel_handles(1),'Position'); % Panel Size
+%         set(Pannel_handles,'Position',[PS1(1) PS1(2)+Y(1) PS1(3) PS1(4)]);
+%         
+%         % Place New Pannel
+%         PS2 = get(allchild(NewWindHandle),'Position'); % Panel Size
+%         uipanel(GUI_handle,'Units','characters','Position',[PS1(1) PS1(2)+Y(2) PS2(3) PS2(4)]);
+        
+%     case 2
+%         Nh = max([S1(3),S2(3)]); Nv = S1(4)+S2(4);
+%         Y = Nv-S1(4);
+%         
+%         % Resize Current window
+%         set(GUI_handle,'Position',[S1(1) S1(2)  Nh   Nv]); 
+%         
+%         % Move Existing Panels to the top
+%         Pannel_handles = allchild(f(1).figure1);
+%         Hposition=get(Pannel_handles,'Position');
+%         Hposition{1}(2) = Hposition{1}(2)+Y; % Vertical Shift
+%         Hposition{2}(2) = Hposition{2}(2)+Y; % Vertical Shift
+%         
+%         NewPosition = [Hposition{1}; Hposition{2}];
+%         set(Pannel_handles(2),'Position',NewPosition(2,:));
+%         set(Pannel_handles(1),'Position',NewPosition(1,:));
+%         
+%         % Place New Pannel
+%         PS3 = get(NewWindHandle,'Position'); % Panel Size
+%         uipanel(GUI_handle,'Units','characters','Position',[PS2(1) PS2(2) PS2(3) PS3(4)]);
+% end
+
+CopyControls(NewWindHandle,f(1),Pannel_handles(1)); % Copy Controls
+gh.advancedCycleGui=guihandles(advancedCycleGui);
+
+    %% Find handles of all controls in New GUI
+    
+    function CopyControls(varargin)
+    
+    NewWindHandle = varargin{1};
+    CurrentGUI_handle = varargin{2};
+    NewPannel_handle = varargin{3};
+    AllCtrl = allchild(allchild(NewWindHandle));
+    Nch =  length(AllCtrl);
+    
+    NewPanel_handle = allchild(NewWindHandle); % Get the New window Panel Handle
+    
+    % Loop over all controls in a GUI and Place them in the new panel
+    for f1=2:Nch
+        uicontrol(NewPannel_handle); % New Control
+        nch=get(NewPannel_handle,'Children'); nch=nch(1); % Handle to new control
+        
+        CopiedCtrl_handle = AllCtrl(f1); % Handle to Copied Control
+        CopiedCtrl_prop = get(CopiedCtrl_handle); % Copied Control Properties
+        
+        s_fields=fieldnames(set(CopiedCtrl_handle)); % User Settable Properties
+        Val = get(CopiedCtrl_handle,s_fields)'; % Get val of settable properties
+        
+        PC=cell2struct(Val,s_fields,1); % Prop to be copied
+        PC=setfield(PC,'Parent',NewPannel_handle); % Change Parent
+        set(nch,PC); % Assigne Properties to New Control
+        
+        pp = getfield(CopiedCtrl_prop,'Position');
+        set(nch,'Position',pp); % Update Position
+    end
