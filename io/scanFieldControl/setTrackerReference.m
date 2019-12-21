@@ -1,7 +1,7 @@
 function setTrackerReference
 	global state gh
 	
-	figure(state.internal.GraphFigure(state.acq.trackerChannel));
+	figure(state.imaging.internal.figureHandle{state.acq.trackerChannel});
 
 	k = waitforbuttonpress;
 
@@ -50,6 +50,6 @@ function setTrackerReference
 	updateGuiByGlobal('state.acq.scanShiftY');
 	updateGuiByGlobal('state.acq.pixelShiftX');
 	updateGuiByGlobal('state.acq.pixelShiftY');
-	updateReferenceImage;
+	siFigures_updateReferenceImage;
 
-	siFigures_udpateCLim
+	siFigures_updateCLim

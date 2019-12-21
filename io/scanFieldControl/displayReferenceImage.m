@@ -10,7 +10,7 @@ function displayReferenceImage(overwrite)
             set(state.internal.refFigure, 'CloseRequestFcn', '');
 			delete(state.internal.refFigure);
         else
-    		updateReferenceImage;
+    		siFigures_updateReferenceImage;
 			set(state.internal.refFigure, 'Visible', 'on');
 			return
 		end
@@ -53,4 +53,4 @@ function displayReferenceImage(overwrite)
 		);
     
     set(state.internal.refAxis, 'DataAspectRatioMode', 'auto');
-    updateReferenceImage;
+    siFigures_updateReferenceImage;

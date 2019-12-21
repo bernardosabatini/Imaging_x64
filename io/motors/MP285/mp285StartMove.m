@@ -57,7 +57,7 @@ end
 xyz2=fix(xyz*10).*[state.motor.calibrationFactorX state.motor.calibrationFactorY state.motor.calibrationFactorZ];
 
 % flush all the junk out
-MP285Flush;
+mp285Flush;
 state.motor.movePending=1;
 state.motor.requestedPosition=xyz;
 % send move command

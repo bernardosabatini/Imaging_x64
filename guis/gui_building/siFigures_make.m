@@ -23,7 +23,7 @@ function siFigures_make
     state.imaging.internal.maxAxisHandle=cell(length(channelList), state.internal.numberOfStripes);
     state.imaging.internal.maxImageHandle=cell(length(channelList), state.internal.numberOfStripes);
     state.imaging.internal.compositeAxisHandle=cell(1, state.internal.numberOfStripes);
-    state.imaging.internal.compositeImageHandle=cell(1, state.internal.numberOfStripes);
+    state.imaging.internal.compositeImageHandle=[];
 
 	for channelCounter = channelList
 		state.imaging.internal.figureHandle{channelCounter} = figure(...

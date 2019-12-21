@@ -16,7 +16,7 @@ out=[];
 
 if state.motor.motorOn == 1
 	setStatusString('Talking to MP285...');
-	currentPos = MP285GetPos;	% Get current Position
+	currentPos = mp285GetPos;	% Get current Position
 	% Set the absolute values
 	if isempty(currentPos)
 		disp('updateMotorPosition: No position information available');

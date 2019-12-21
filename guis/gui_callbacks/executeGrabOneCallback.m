@@ -2,7 +2,8 @@ function executeGrabOneCallback
 	global state gh
 
 	state.internal.looping=0;
-
+    state.timer.abort=0;
+    
 	val=get(gh.siGUI_ImagingControls.grabOneButton, 'String');
 
 	persistent multipleAbortAttempts
@@ -31,7 +32,12 @@ function executeGrabOneCallback
 		
 		state.cycle.loopingStatus=0;
 		timerCallPackageFunctions('Trigger', 'Imaging');
-		
+        timerWaitForSessionEnds('Imaging');
+        if state.timer.abort
+        else
+            timerRegisterPackageDone('Imaging');
+        end
+        
 	elseif strcmp(val, 'ABORT')
 		timerCallPackageFunctions('Abort', 'Imaging');
 		multipleAbortAttempts=multipleAbortAttempts+1;

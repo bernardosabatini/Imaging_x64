@@ -1,10 +1,8 @@
 function timerProcess_Imaging
 	global state gh
 
-	
-	trackImage;
-
-	updateReferenceImage;
+    trackImage;
+	siFigures_updateReferenceImage;
 
 	if any(state.internal.excelChannel) && (state.files.autoSave==1)
 		try
@@ -52,6 +50,8 @@ function timerProcess_Imaging
 		set(gh.siGUI_ImagingControls.grabOneButton, 'String', 'GRAB');
 		set(gh.siGUI_ImagingControls.grabOneButton, 'Visible', 'On');	
 		turnOnMenus;
+    else
+		set(gh.siGUI_ImagingControls.focusButton, 'Visible', 'On');
 	end
 	
 	if state.blaster.active && any(state.blaster.allConfigs{state.blaster.currentConfig, 2}(:, 6))
@@ -81,7 +81,7 @@ function timerProcess_Imaging
 	end
 	
 	if state.internal.abortActionFunctions
-		abortGrab;
+		siSession_abort
 		return
 	end
 	

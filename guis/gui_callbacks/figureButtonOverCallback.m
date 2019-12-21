@@ -19,9 +19,13 @@ function figureButtonOverCallback
 
 
 	if strcmp('Max', name(1:3))	 % Looking at a max projection
-		state.internal.intensity = projectionData{channel}(state.internal.currentPointY, state.internal.currentPointX);
-	else
-		state.internal.intensity = lastAcquiredFrame{channel}(state.internal.currentPointY, state.internal.currentPointX);
+        if ~isempty(projectionData{channel})
+            state.internal.intensity = projectionData{channel}(state.internal.currentPointY, state.internal.currentPointX);
+        end
+    else
+        if ~isempty(lastAcquiredFrame{channel})
+            state.internal.intensity = lastAcquiredFrame{channel}(state.internal.currentPointY, state.internal.currentPointX);
+        end
 	end
 
 	updateGuiByGlobal('state.internal.intensity');

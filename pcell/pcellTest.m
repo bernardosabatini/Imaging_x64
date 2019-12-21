@@ -9,7 +9,7 @@ function pcellTest(chan)
 		global state
 		disp('Running...')
 	
-        siSession_parkMirrors([0 0]);
+        siSession_outputs_to_default
         		
 		state.pcell.pcellTestOut=[0:.01:2];
 		state.pcell.pcellTestIn=zeros(1,size(state.pcell.pcellTestOut,2));
@@ -33,5 +33,5 @@ function pcellTest(chan)
 
         putsample(state.pcell.pCellTestOutObj, 0) ;          
 
-        siSession_parkMirrors;
+        siSession_outputs_to_default;
 		disp('Done...')

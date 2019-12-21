@@ -1,2 +1,3 @@
+
 function timerFirstSetup_Imaging
-    siSession_allocateMemory
+%    siSession_set_mode('grab', 1)

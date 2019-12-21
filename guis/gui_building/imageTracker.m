@@ -96,4 +96,4 @@ function setReference_Callback(hObject, eventdata, handles)
 	
 function generic_Callback(hObject, eventdata, handles)
 	genericCallback(hObject);
-	updateReferenceImage;
+	siFigures_updateReferenceImage;

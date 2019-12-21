@@ -64,7 +64,7 @@ xyz2=fix(xyz*state.motor.resolution).*	...
 	[state.motor.calibrationFactorX state.motor.calibrationFactorY state.motor.calibrationFactorZ];
 
 % flush all the junk out
-MP285Flush;
+mp285Flush;
 
 % temp=MP285Comp14ByteArr(xyz);
 try
@@ -79,7 +79,7 @@ end
 
 if out ~= 13; 
 	disp(['MP285SetPos: MP285 return an error.  Unsure of movement status.']); 
-	MP285Flush;
+	mp285Flush;
 	state.motor.lastPositionRead=[];
 	out=1;
 	return;
@@ -87,7 +87,7 @@ end				% check if CR was returned
 
 % check if position was attained
 if checkPosition
-	xyzN=MP285GetPos;
+	xyzN=mp285GetPos;
 	if isempty(xyzN)
 		disp(['MP285SetPos: Unable to check movement.']);
 	elseif fix(xyz*state.motor.resolution) ~= fix(xyzN*state.motor.resolution); 

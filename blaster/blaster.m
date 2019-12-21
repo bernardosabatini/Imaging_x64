@@ -82,9 +82,9 @@ function active_Callback(hObject, eventdata, handles)
 		disp(['blaster: ' lasterr]);
 	end
 	try
-		updateReferenceImage;
+		siFigures_updateReferenceImage;
     catch
-		disp(['blaster (updateReferenceImage): ' lasterr]);
+		disp(['blaster (siFigures_updateReferenceImage): ' lasterr]);
     end
 	set(hObject, 'Enable', 'on');	
 
@@ -223,9 +223,9 @@ function pickPosition_Callback(hObject, eventdata, handles)
 	end
 	
 	try
-		updateReferenceImage
+		siFigures_updateReferenceImage
 	catch
-		disp(['blaster selection (updateReferenceImage): ' lasterr]);
+		disp(['blaster selection (siFigures_updateReferenceImage): ' lasterr]);
 	end
 	set(hObject, 'Enable', 'on');
 	
@@ -410,7 +410,7 @@ function reviewTile_Callback(hObject, eventdata, handles)
 			updateGuiByGlobal('state.blaster.X');
 			updateGuiByGlobal('state.blaster.Y');
 		end
-		updateReferenceImage;
+		siFigures_updateReferenceImage;
 	end
 
 	if length(state.tiler.acqList)>=state.tiler.reviewTile

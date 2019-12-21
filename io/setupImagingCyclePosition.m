@@ -41,17 +41,7 @@ function setupImagingCyclePosition
 		redo=1;
 	end
 	state.blaster.currentConfig = state.cycle.blasterList(state.cycle.currentCyclePosition);
-		
-	%% Added by TN Apr 01 2005
-	try
-		if state.cycle.scanSetupList(state.cycle.currentCyclePosition) ~= 0 
-			restoreScan(state.cycle.scanSetupList(state.cycle.currentCyclePosition));
-		end
-	catch
-		disp(['ERROR ' lasterr]);
-	end
-	%% End TN Apr 01 2005
-	
+
 	if state.acq.lineScan ~= state.cycle.linescanList(state.cycle.currentCyclePosition)
 		state.acq.lineScan = state.cycle.linescanList(state.cycle.currentCyclePosition);
 		state.internal.needNewRotatedMirrorOutput=1;

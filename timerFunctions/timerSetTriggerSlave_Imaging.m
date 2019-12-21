@@ -1,14 +1,14 @@
 function timerSetTriggerSlave_Imaging
-    global state grabInput grabOutput pcellGrabOutput
+    global state focusInput focusOutput pcellFocusOutput
     
     madeChanges=...
-        timerSession_ensureTriggerConnections(grabInput, 0, state.timer.triggerLine);
+        timerSession_ensureTriggerConnections(focusInput, 0, state.timer.triggerLine);
     
     madeChanges=...
-        timerSession_ensureTriggerConnections(grabOutput, 0, state.timer.triggerLine);
+        timerSession_ensureTriggerConnections(focusOutput, 0, state.timer.triggerLine);
 
     madeChanges=...
-        timerSession_ensureTriggerConnections(pcellGrabOutput, 0, state.timer.triggerLine);
+        timerSession_ensureTriggerConnections(pcellFocusOutput, 0, state.timer.triggerLine);
 
 %     if madeChanges
 %         state.phys.internal.needNewOutputChannels=1;

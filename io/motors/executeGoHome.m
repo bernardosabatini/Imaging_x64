@@ -2,15 +2,15 @@ function moved=executeGoHome
 	moved=0;
 
 	global state
-	if ~state.motor.motorOn
-		return 
-	end
 	
-	if state.acq.numberOfZSlices > 1 & state.acq.returnHome
+	if (state.acq.numberOfZSlices > 1) && state.acq.returnHome
 		if state.piezo.usePiezo
 			state.piezo.next_pos=state.motor.stackStart;
-			piezoUpdatePosition;
+			siPiezo_move
 		else
+            if ~state.motor.motorOn
+                return 
+            end
 			if length(state.internal.initialMotorPosition) ~= 3
 				if state.motor.motorOn
 					disp('executeGoHome: attempt to return to initial position but initial position is corrupted.');

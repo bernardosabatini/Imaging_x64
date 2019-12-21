@@ -9,7 +9,7 @@ state.blaster.indexYList=[];
 state.blaster.indexXList=[];
 
 try
-		updateReferenceImage
+		siFigures_updateReferenceImage
 catch
 end
 

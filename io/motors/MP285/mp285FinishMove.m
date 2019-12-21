@@ -58,7 +58,7 @@ function out=MP285FinishMove(check)
 	% check if position was attained
 	if check
 		setStatusString('Checking move...');
-		xyzN=MP285GetPos;
+		xyzN=mp285GetPos;
 		state.motor.lastPositionRead=xyzN;
 
 		if fix(state.motor.requestedPosition*10) ~= fix(xyzN*10);

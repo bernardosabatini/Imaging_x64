@@ -32,11 +32,9 @@ function loadConfig()
 	end
 
 	siSet_channelFlags;
-%	state.internal.configurationChanged=1;
-%    closeConfigurationGUI;
-	siSet_acquisitionParameters
- 	updateDataForConfiguration;
- 	state.internal.configurationChanged=0;
+    siSession_setup(1); % force flag set to 1
+    siFigures_resetVisible
+    state.internal.configurationChanged=0;
 
 	setStatusString('');
 

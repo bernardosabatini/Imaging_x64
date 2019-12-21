@@ -605,7 +605,7 @@ function maxShift_Callback(hObject, eventdata, handles)
 
 function trackerChannel_Callback(hObject, eventdata, handles)
 	genericCallback(hObject);
-	updateReferenceImage;
+	siFigures_updateReferenceImage;
 
 
 % --- Executes on button press in zoom1.
@@ -718,11 +718,10 @@ function piezoZ_Callback(hObject, eventdata, handles)
 % Hints: get(hObject,'String') returns contents of piezoZ as text
 %        str2double(get(hObject,'String')) returns contents of piezoZ as a double
 	genericCallback(hObject);
-	global state
-	set(hObject, 'Enable', 'off');
-	if state.piezo.usePiezo
-		piezoUpdatePosition;
-	end;
+    set(hObject, 'Enable', 'off');
+
+    siSession_piezo_interupt_and_move
+
 	set(hObject, 'Enable', 'on');
 
 % --- Executes during object creation, after setting all properties.
@@ -749,7 +748,7 @@ function mirrorLag_Callback(hObject, eventdata, handles)
 % Hints: get(hObject,'String') returns contents of mirrorLag as text
 %        str2double(get(hObject,'String')) returns contents of mirrorLag as a double
 	genericCallback(hObject);
-	setAcquisitionParameters
+	siSet_acquisitionParameters
 
 % --- Executes during object creation, after setting all properties.
 function mirrorLag_CreateFcn(hObject, eventdata, handles)
@@ -773,7 +772,7 @@ function mirrorLagSlider_Callback(hObject, eventdata, handles)
 % Hints: get(hObject,'Value') returns position of slider
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
 	genericCallback(hObject);
-	setAcquisitionParameters
+	siSet_acquisitionParameters
 
 % --- Executes during object creation, after setting all properties.
 function mirrorLagSlider_CreateFcn(hObject, eventdata, handles)

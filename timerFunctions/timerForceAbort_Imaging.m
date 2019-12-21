@@ -1,4 +1,4 @@
 function timerForceAbort_Imaging
-	abortGrab;
+	siSession_abort
     timerAbort_Imaging;
 	

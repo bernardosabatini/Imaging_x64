@@ -49,12 +49,10 @@ function timerInit_Imaging(userFile,analysisMode)
 	
 	setStatusString('Initializing...');
 
-    mp285Config;
+    siMotor_config;
     
-	global focusInput focusOutput pcellFocusOutput
-	global grabInput grabOutput pcellGrabOutput
-	evalin('base','global focusInput focusOutput pcellFocusOutput');
-	evalin('base','global grabInput grabOutput pcellGrabOutput');
+	global focusInput focusOutput piezoOutput pcellFocusOutput
+	evalin('base','global focusInput focusOutput piezoOutput pcellFocusOutput');
 
 	siSet_channelFlags;
     siSet_keepAllSlicesCheckMark
@@ -67,16 +65,23 @@ function timerInit_Imaging(userFile,analysisMode)
         siSession_buildInput
     end
 
+    if state.piezo.usePiezo
+        if state.piezo.useUSBControl
+            siPI_start_interface
+        else
+            siPiezo_initialize
+        end
+    end
+            
     siSession_allocateMemory
     
     siSet_compositeChannels
-	
-    resetImageProperties(0);
 	siSet_counters
+    siSet_lutSliders		
     
-    siSet_lutSliders			
-	siFigures_udpateCLim
-  
+    siFigures_resetVisible
+	siFigures_updateCLim
+    
     initBlaster;
 	
 	if ~isempty(userFile)
@@ -88,7 +93,7 @@ function timerInit_Imaging(userFile,analysisMode)
 	
 	makeConfigurationMenu;
 	if ~analysisMode
-		siSession_parkMirrors
+		siSession_outputs_to_default
 	end
 	
 	setStatusString('Initializing...');
@@ -104,8 +109,13 @@ function timerInit_Imaging(userFile,analysisMode)
 	state.cycle.imagingOnList(1)=1;
 
 	siSession_prepareOutput(1)
+    if state.imaging.daq.imagingForcesDigitalTrigger
+        siSession_make_digital_trigger;
+    end    
 	siShowHidePcellBoxControls
 		
+    siSession_set_mode('focus');
+
 	waitbar(.9,h, 'Initialization Done');
 	
 	setStatusString('Ready to use');

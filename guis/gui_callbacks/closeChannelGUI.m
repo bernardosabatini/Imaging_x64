@@ -6,8 +6,10 @@ function closeChannelGUI
 		hideGUI('gh.channelGUI.figure1');
 		siSet_channelFlags
         siSet_lutSliders
-		siSession_buildInput
         siFigures_resetVisible
+    	siFigures_updateCLim
+		siSession_buildInput
+
 		state.internal.channelChanged=0;
 	else
 		hideGUI('gh.channelGUI.figure1');

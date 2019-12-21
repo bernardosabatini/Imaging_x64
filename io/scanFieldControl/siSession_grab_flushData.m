@@ -1,8 +1,8 @@
 function siSession_grab_flushData
-	global state
-	global grabOutput pcellGrabOutput
-	
+	global state grabOutput pcellGrabOutput
+
     if grabOutput.ScansQueued>0
+        'flushed needed'
 		grabOutput.stop()
         if grabOutput.ScansQueued>0
             grabOutput.release()
@@ -12,15 +12,3 @@ function siSession_grab_flushData
         end
     end
 
-	if state.pcell.pcellOn
-        if pcellGrabOutput.ScansQueued>0
-            pcellGrabOutput.stop()
-            if pcellGrabOutput.ScansQueued>0
-                pcellGrabOutput.release()
-            end
-            if pcellGrabOutput.ScansQueued>0
-                error('siSession_grab_flushData: pcellGrabOutput flush failed');
-            end
-        end
-    end            
-        

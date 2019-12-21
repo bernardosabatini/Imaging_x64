@@ -1,6 +1,6 @@
-function executeFocusCallback
+ function executeFocusCallback
 	global state gh
-    global focusInput focusOutput pcellFocusOutput 
+    global focusInput focusOutput pcellFocusOutput
     
 	persistent multipleAbortAttempts
 	
@@ -43,35 +43,38 @@ function executeFocusCallback
 		
 		mp285Flush;
 		siSet_counters
-        siSession_focus_flushData
-        siSession_focus_queueData
         
         if state.internal.updatedZoomOrRot % need to reput the data with the approprite rotation and zoom.
             state.internal.updatedZoomOrRot=0;
  		end
 
-		
 		state.internal.abortActionFunctions=0;
 		multipleAbortAttempts=0;
 	
         state.internal.status=2;
         state.internal.lastTaskDone=2;
     
+        siSession_set_mode('focus', 1)
+
         focusOutput.startBackground();
-        if state.pcell.pcellOn
+        if state.pcell.pcellOn && ~state.pcell.usingOutputBoard
             pcellFocusOutput.startBackground();
-        end
-        focusInput.startBackground();
+        end            
+        timerTrigger_Imaging
+        %focusInput.startBackground();
+
 	else
 		multipleAbortAttempts=multipleAbortAttempts+1;
 		if focusInput.IsRunning
-            siSession_focus_abort;
+            siSession_abort;
 		else
 			state.internal.abortActionFunctions=1;
 			if multipleAbortAttempts>1
-				siSession_focus_abort;
+				siSession_abort;
     			if multipleAbortAttempts>2
-                    disp('Multiple abort attempts.  Will force abort.');
+                    disp('Multiple abort attempts.  Forcing rebuild.');
+                    state.imaging.daq.needNewInputSession=1;
+                    siSession_setup(1);
                 end
 			end
 		end

@@ -84,7 +84,7 @@ function varargout = pixelsPerLine_Callback(h, eventdata, handles, varargin)
 	state.acq.pixelsPerLineGUI = get(h,'Value');
 	state.acq.pixelsPerLine = str2num(getMenuEntry(h, state.acq.pixelsPerLineGUI));
 	genericCallback(h);
-	setAcquisitionParameters;
+	siSet_acquisitionParameters;
 
 % --- Executes during object creation, after setting all properties.
 function lineDelay_CreateFcn(hObject, eventdata, handles)
@@ -134,7 +134,7 @@ function varargout = fillFraction_Callback(h, eventdata, handles, varargin)
 	state.internal.configurationChanged=1;
 	state.internal.configurationNeedsSaving=1;
 	genericCallback(h);
-	setAcquisitionParameters;
+	siSet_acquisitionParameters;
 
 
 % --- Executes during object creation, after setting all properties.
@@ -160,7 +160,7 @@ function varargout = msPerLine_Callback(h, eventdata, handles, varargin)
 	state.internal.configurationChanged=1;
 	state.internal.configurationNeedsSaving=1;
 	genericCallback(h);
-	setAcquisitionParameters;
+	siSet_acquisitionParameters;
 
 
 % --- Executes during object creation, after setting all properties.
@@ -181,7 +181,7 @@ function outputRate_Callback(hObject, eventdata, handles)
 	state.internal.configurationChanged=1;
 	state.internal.configurationNeedsSaving=1;
 	siApplyDAQSampleRates
-	setAcquisitionParameters;	
+	siSet_acquisitionParameters;	
 
 
 % --- Executes during object creation, after setting all properties.
@@ -194,7 +194,7 @@ function inputRate_Callback(hObject, eventdata, handles)
 	state.internal.configurationChanged=1;
 	state.internal.configurationNeedsSaving=1;
 	siApplyDAQSampleRates
-%	setAcquisitionParameters;	
+%	siSet_acquisitionParameters;	
 
 % --- Executes during object creation, after setting all properties.
 function pixelTime_CreateFcn(hObject, eventdata, handles)
@@ -230,7 +230,7 @@ function bidi_Callback(hObject, eventdata, handles)
 	state.internal.configurationChanged=1;
 	state.internal.configurationNeedsSaving=1;
 	genericCallback(hObject);
-	setAcquisitionParameters;
+	siSet_acquisitionParameters;
 
 function trimImageEdges_Callback(hObject, eventdata, handles)
 	genericCallback(hObject);

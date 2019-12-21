@@ -28,11 +28,11 @@ function out=MP285SetVelocity(vel, res)
 	end
 	
 	% flush all the junk out
-	MP285Flush;
+	mp285Flush;
 	fwrite(state.motor.serialPortHandle, 'V');
 	fwrite(state.motor.serialPortHandle, vel, 'uint16');
 	fwrite(state.motor.serialPortHandle, 13);
-	out=MP285ReadAnswer;
+	out=mp285ReadAnswer;
 	if isempty(out)		% check if CR was returned
 		disp(['MP285SetVelocity: Timeout in serial communication']); 
 		out=1;

@@ -21,7 +21,7 @@ global state
 
 
 	setStatusString('Moving stage...');
-	MP285SetPos(newPos);
+	mp285SetPos(newPos);
 	
 	state.motor.absXPosition=newPos(1,1);
 	state.motor.absYPosition=newPos(1,2);

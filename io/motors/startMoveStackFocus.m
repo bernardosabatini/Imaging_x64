@@ -13,11 +13,13 @@ global state
 %	updateMotorPosition(0);		% Update Motor Position
 
 	% BSMOD2 added below to handle peizo stack focusing
+    'stack move'
 if state.piezo.usePiezo
-	state.piezo.next_pos = state.piezo.next_pos + state.acq.zStepSize;
 	oldStatus=state.internal.statusString;
 	setStatusString('Moving stage...');
-	piezoUpdatePosition;
+
+    siPiezo_move_next_slice
+
 	setStatusString(oldStatus);
 else
 	state.motor.absZPosition = state.motor.absZPosition + state.acq.zStepSize; % Calcualte New value

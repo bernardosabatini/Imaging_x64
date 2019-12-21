@@ -14,22 +14,25 @@ function siListener_focusStripe(~, event)
 % 2002 - 2009
 
 
-	global focusInput state
+	global state
 	
 	if state.internal.pauseAndRotate
 		siSession_focus_stopAndRestart
 		return
 	end
 
-	if (state.internal.looping==1) && (state.internal.stripeCounter==1)
-		state.internal.secondsCounter=floor(state.internal.lastTimeDelay-etime(clock,state.internal.triggerTime));
+	if state.internal.stripeCounter==0
+		if state.internal.looping==1
+			state.internal.secondsCounter=floor(state.internal.lastTimeDelay-etime(clock,state.internal.triggerTime));
+		else
+			state.internal.secondsCounter=floor(etime(clock,state.internal.triggerTime));
+        end
 		updateGuiByGlobal('state.internal.secondsCounter');
 	end
 
 	stripeData = event.Data;
+%     100*mean(stripeData)
     
-    %getdata(focusInput, state.internal.samplesPerStripe, 'double'); % Gets enoogh data for one stripe from the DAQ engine for all channels present
-
 	siProcessImageStripe(stripeData, 0);
 	
 	if state.internal.pauseAndRotate
@@ -38,9 +41,7 @@ function siListener_focusStripe(~, event)
 	end
 	
 	if state.internal.abortActionFunctions
-		siSession_focus_abort
-		siRedrawImages
-		return
+		siSession_abort
 	end
 
 	state.internal.stripeCounter = state.internal.stripeCounter + 1; % increments the stripecounter to ensure proper image displays
@@ -51,8 +52,7 @@ function siListener_focusStripe(~, event)
 	end
 	
 	if state.internal.abortActionFunctions
-		siSession_focus_abort
-		siRedrawImages
+		siSession_abort
 		return
 	end
 

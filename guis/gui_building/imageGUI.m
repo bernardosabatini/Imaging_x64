@@ -80,7 +80,7 @@ function varargout = genericLUT_Callback(h, eventdata, handles, varargin)
             disp(['Unknown channel number from tag ' tag]);
             return
         end
-		siFigures_udpateCLim(chanNum);
+		siFigures_updateCLim(chanNum);
 	catch
 		disp(['imageGUI: LUT callback. ' lasterr]);
     end
@@ -92,7 +92,7 @@ function varargout = reviewFrame(h, eventdata, handles, varargin)
 % Stub for Callback of the uicontrol handles.slider1.
 	genericCallback(h);
 	global state
-	siFigures_udpateCLim([], state.internal.reviewFrame);
+	siFigures_redraw([], state.internal.reviewFrame);
 	
 % --------------------------------------------------------------------
 function varargout = currentPosX_Callback(h, eventdata, handles, varargin)

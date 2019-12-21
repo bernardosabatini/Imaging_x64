@@ -1,6 +1,4 @@
 function setupScanImageFigurePositions
-disp('setupScanImageFigurePositions bypassed.  Handled aspect ratios');
-return
 
 	global state
 

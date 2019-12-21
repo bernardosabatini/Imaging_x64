@@ -23,47 +23,31 @@ function siListener_grabStripe(~, event)
 % Write complete header string  for only the first frame
 	
 	stripeData = event.Data; 
-    state.internal.stripeCounter 
-    size(stripeData)
-    figure;plot(stripeData(:,2))
+       
+    if state.internal.abortActionFunctions
+        siSession_abort
+        return
+    end
     
-	% Gets enoogh data for one stripe from the DAQ engine for all channels present
-
     if state.internal.stripeCounter==0
-		if state.internal.looping==1
+		if state.cycle.loopingStatus==1
 			state.internal.secondsCounter=floor(state.internal.lastTimeDelay-etime(clock,state.internal.triggerTime));
-		else
+        else
 			state.internal.secondsCounter=floor(etime(clock,state.internal.triggerTime));
 		end
 		updateGuiByGlobal('state.internal.secondsCounter');
     end
-
-	try
-		if (state.internal.frameCounter==state.acq.numberOfFrames-1) && (state.internal.stripeCounter==state.internal.numberOfStripes-1)
-			if state.acq.numberOfZSlices > 1
-				startMoveStackFocus; 	% start movement - focal plane down one step
-			end
-		end
-	catch
-		disp(['Error in makeFromByStripes (1) : ' lasterr]);
-	end
 	
  	try
 		siProcessImageStripe(stripeData, state.acq.averaging);
 		state.internal.stripeCounter = state.internal.stripeCounter + 1;
 	catch
-		if state.internal.abortActionFunctions
-			abortGrab
-			siRedrawImages
-			return
-		else
-			setStatusString('Error in frame by stripes');
-			disp('makeFrameByStripes: Error in action function');
-			disp(lasterr);
-		end
-	end
-	
-	if state.internal.stripeCounter==state.internal.numberOfStripes % we finished a fram
+        setStatusString('Error in frame by stripes');
+        disp('makeFrameByStripes: Error in action function');
+        disp(lasterr);
+    end
+    
+    if state.internal.stripeCounter==state.internal.numberOfStripes % we finished a frame
 		state.internal.frameCounter=state.internal.frameCounter + 1;	% Increments the frameCounter to ensure proper image storage and display
 		updateGuiByGlobal('state.internal.frameCounter');	% Updates the frame Counter on the main controls GUI.
 		state.internal.stripeCounter=0;
@@ -88,24 +72,18 @@ function siListener_grabStripe(~, event)
 			if state.acq.dualLaserMode==2
 				imageData{channel+10}(:,:,framePosition)=lastAcquiredFrame{channel+10}(:,:);
 			end
-			
-		end
-		
-		if state.internal.abortActionFunctions
-			abortGrab
-			siRedrawImages
-			return
-		end
+        end
 
-		if state.internal.frameCounter >= state.acq.numberOfFrames 
-			endAcquisition	% we finished the required frames for this slice 	
+        if state.internal.abortActionFunctions
+            siSession_abort
+            return
+        end
+        
+        if state.internal.frameCounter >= state.acq.numberOfFrames
+             global  focusInput 
+             focusInput.stop();
+        % we finished the required frames for this slice 	
 		end
 	end
 
-	
-	if state.internal.abortActionFunctions
-		abortGrab
-		siRedrawImages
-		return
-	end
 

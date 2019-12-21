@@ -6,7 +6,6 @@ function siFigures_resetVisible(moveWindows)
     end
     
 	% This loop sets up the aspect ratios for the figures
-	siFigures_udpateCLim;
 	
 	setupScanImageFigurePositions;
     

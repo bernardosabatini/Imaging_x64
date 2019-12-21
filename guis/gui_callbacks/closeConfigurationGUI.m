@@ -18,9 +18,9 @@ function closeConfigurationGUI
 
 	if state.internal.configurationChanged 
 		recordWindowPositions;
-		setAcquisitionParameters
-		updateDataForConfiguration;
-	end
+        siSession_setup(1); % force flag set to 1
+        siFigures_resetVisible
+    end
 	state.internal.configurationChanged=0;
 
 	hideGUI('gh.basicConfigurationGUI.figure1');

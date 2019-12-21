@@ -1,4 +1,8 @@
-function out=MP285Config
+function out=MP285Config(motorNumber)
+if nargin<1 
+    motorNumber=1;
+end
+
 % MP285Config configures the serial port for the MP285 Sutter controler
 % 
 % MP285Config sets up the serial port (given by sPort, i.e. 'COM2') for communication with 
@@ -55,9 +59,9 @@ function out=MP285Config
 		return;
 	end
 
-MP285Talk(state.motor.AbsORRel);
-MP285Talk('n'); % updateScreen
-MP285SetVelocity(state.motor.velocitySlow,0);
+mp285Talk(state.motor.AbsORRel);
+mp285Talk('n'); % updateScreen
+mp285SetVelocity(state.motor.velocitySlow,0);
 
 out=0;
 

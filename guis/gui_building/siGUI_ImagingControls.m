@@ -41,14 +41,14 @@ function varargout = generic_Callback(h, eventdata, handles, varargin)
 function varargout = ZSlice_Callback(h, eventdata, handles, varargin)
 % Stub for Callback of most uicontrol handles
 	genericCallback(h);
-	preallocateMemory;
+	siSession_allocateMemory;
 	
 function varargout = numberOfFrames_Callback(h, eventdata, handles, varargin)
 % Stub for Callback of most uicontrol handles
 	genericCallback(h);
 	global state
 
-	preallocateMemory;
+	siSession_allocateMemory;
 	
 	if state.acq.dualLaserMode==1 % if the lasers are on simulataneously then nothing special
 		sampleFactor=1;
@@ -61,12 +61,12 @@ function varargout = numberOfFrames_Callback(h, eventdata, handles, varargin)
 	state.internal.needNewPcellRepeatedOutput=1;
 	state.internal.needNewRepeatedMirrorOutput=1;
 	siSession_prepareOutput
-	siFigures_udpateCLim
+	siFigures_updateCLim
 	
 function varargout = averaging_Callback(h, eventdata, handles, varargin)
 % Stub for Callback of most uicontrol handles
 	genericCallback(h);
-	preAllocateMemory;
+	siSession_allocateMemory;
 	
 % --------------------------------------------------------------------
 function varargout = focusButton_Callback(h, eventdata, handles, varargin)

@@ -29,7 +29,7 @@ end
 
 %whos state.motor.serialPortHandle;
 % get all the junk out
-MP285Flush;
+mp285Flush;
 
 mp285Error=0;
 

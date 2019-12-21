@@ -1,18 +1,18 @@
 function status=timerReadyForTrigger_Imaging
-	global state grabOutput pcellGrabOutput
+	global state focusOutput pcellFocusOutput
 	
 	status=1;	% good to do
 	
-	if state.pcell.pcellOn
-		if ~pcellGrabOutput.IsRunning
+	if state.pcell.pcellOn && ~state.pcell.usingOutputBoard
+		if ~pcellFocusOutput.IsRunning
 			status=0; % not ready
-			disp('timerReadyForTrigger_Imaging: pcellGrabOutput device not ready');
+			disp('timerReadyForTrigger_Imaging: pcellFocusOutput device not ready');
 		end
 	end	
 
-	if ~grabOutput.IsRunning
+	if ~focusOutput.IsRunning
 		status=0; % not ready
-		disp('timerReadyForTrigger_Imaging: grabOutput device not ready');
+		disp('timerReadyForTrigger_Imaging: focusOutput device not ready');
 	end
 
 
