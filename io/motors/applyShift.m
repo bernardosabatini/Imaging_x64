@@ -15,7 +15,7 @@ function applyShift(position)
 	
 	flag=updateMotorPosition;
 	if isempty(flag)
-		disp('applyShiftXY : Unable to shift XY.  MP285 Error');
+		disp('applyShiftXY : Unable to shift XY.  mp285 Error');
 		beep;
 	else
 		sh=state.motor.lastPositionRead-state.motor.positionVectors(position, :);

@@ -138,4 +138,6 @@ function siSession_buildOutput
     setStatusString('done')
 
     state.imaging.daq.needNewOutputSession=0;
+    state.internal.needNewMirrorOutput=1;
+    state.internal.needNewPcellBinaryOutput=1;
 

@@ -1,14 +1,14 @@
 
-function out=MP285FinishMove(check)
-% MP285SetPos controls the position of the MP285
+function out=mp285FinishMove(check)
+% mp285SetPos controls the position of the mp285
 % 
-% MP285SetPos 
+% mp285SetPos 
 % 
 % Class Support
 %   -------------
 %   The input variable [x y z] contains the absolute motor target positions in microns. 
 %   The optional paramter 'resolution' contains the resolution in nm (nanometers)
-%	The value used depends on the MP285 microcode 
+%	The value used depends on the mp285 microcode 
 %		
 %   Karel Svoboda 8/28/00 Matlab 6.0R
 %	svoboda@cshl.org
@@ -23,7 +23,7 @@ function out=MP285FinishMove(check)
 		check=1;
 	end
 	if ~state.motor.movePending
-		disp('MP285FinishMove:  Error: Called with no move pending');
+		disp('mp285FinishMove:  Error: Called with no move pending');
 		out=1;
 		return
 	end
@@ -31,7 +31,7 @@ function out=MP285FinishMove(check)
 	status=state.internal.statusString;
 	state.motor.movePending=0;
 	if length(state.motor.serialPortHandle) == 0
-		disp(['MP285SetPos: MP285 not configured']);
+		disp(['mp285SetPos: mp285 not configured']);
 		state.motor.lastPositionRead=[];
 		out=1;
 		return;
@@ -45,12 +45,12 @@ function out=MP285FinishMove(check)
 		end
 		temp=fread(state.motor.serialPortHandle,n); 
 		if temp(1)~=13
-			disp('MP285FinishMove: Error: CR not returned by MP285');
+			disp('mp285FinishMove: Error: CR not returned by mp285');
 			out=1;
 			return
 		end
 	catch
-		disp('MP285FinishMove: Error in MP285 communication');
+		disp('mp285FinishMove: Error in mp285 communication');
 		out=1;
 		return
 	end		
@@ -63,7 +63,7 @@ function out=MP285FinishMove(check)
 
 		if fix(state.motor.requestedPosition*10) ~= fix(xyzN*10);
 			setStatusString('Bad move.');
-			disp(['MP285SetPos: Requested position not attained; check hardware']);
+			disp(['mp285SetPos: Requested position not attained; check hardware']);
 			state.motor.lastPositionRead=[];
 			out=1;
 			return

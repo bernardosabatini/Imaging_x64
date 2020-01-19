@@ -1,13 +1,13 @@
 
-function xyz=MP285GetPos
-% MP285GetPos retrieves the position information from the MP285 controller
+function xyz=mp285GetPos
+% mp285GetPos retrieves the position information from the mp285 controller
 % 
-% MP285GetPos 
+% mp285GetPos 
 % 
 % Class Support
 %   -------------
 %   
-%	the output [x y z] is the position of the MP285 in microns
+%	the output [x y z] is the position of the mp285 in microns
 %		
 %   Karel Svoboda 8/28/00 Matlab 6.0R
 %	 svoboda@cshl.org
@@ -21,7 +21,7 @@ if state.motor.motorOn==0
 end
 	
 if length(state.motor.serialPortHandle) == 0
-	disp(['MP285GetPos: MP285 not configured.']);
+	disp(['mp285GetPos: mp285 not configured.']);
 	xyz=[];
 	state.motor.lastPositionRead=[];
 	return
@@ -57,16 +57,16 @@ if ~mp285Error
 end
 
 if mp285Error
-	disp('mp285GetPos: Error in MP285 Communication');
+	disp('mp285GetPos: Error in mp285 Communication');
 	disp(lasterr)
-	setStatusString('MP285 Error. Reset?');
+	setStatusString('mp285 Error. Reset?');
 	state.motor.lastPositionRead=[];
 	return
 end
 
 
 if length(array)<3 | length(dummy)<1				% check if data is avaiable
-	disp(['MP285GetPos: MP285 position data not available ']);
+	disp(['mp285GetPos: mp285 position data not available ']);
 	xyz=[];
 	state.motor.lastPositionRead=[];
 	return;	

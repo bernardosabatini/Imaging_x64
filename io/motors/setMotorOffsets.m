@@ -5,7 +5,7 @@ global state gh
 % Function that will upate the Motor offsets, Relative, and Absolute Positions.
 
 
-currentPos = MP285GetPos;	% Get current Position
+currentPos = mp285GetPos;	% Get current Position
 
 % Set the Offsets
 state.motor.offsetX = currentPos(1,1);

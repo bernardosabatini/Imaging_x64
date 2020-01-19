@@ -1,4 +1,4 @@
-function out=MP285SetVelocity(vel, res)
+function out=mp285SetVelocity(vel, res)
 
 	out=1;
 	if nargin==0
@@ -7,7 +7,7 @@ function out=MP285SetVelocity(vel, res)
 	elseif nargin==1
 		res=0;
 	elseif nargin>2
-		disp('MP285SetVelocity: Expect only upto 2 arguments.');
+		disp('mp285SetVelocity: Expect only upto 2 arguments.');
 		return
 	end
 	
@@ -16,8 +16,8 @@ function out=MP285SetVelocity(vel, res)
 		return
 	end
 
-	if length(state.motor.serialPortHandle) == 0
-		disp(['MP285SetVelocity: MP285 not configured']);
+	if isempty(state.motor.serialPortHandle)
+		disp(['mp285SetVelocity: mp285 not configured']);
 		state.motor.lastPositionRead=[];
 		return;
 	end
@@ -34,11 +34,11 @@ function out=MP285SetVelocity(vel, res)
 	fwrite(state.motor.serialPortHandle, 13);
 	out=mp285ReadAnswer;
 	if isempty(out)		% check if CR was returned
-		disp(['MP285SetVelocity: Timeout in serial communication']); 
+		disp(['mp285SetVelocity: Timeout in serial communication']); 
 		out=1;
 		return;
 	elseif length(out)>1 | out(1)~=13
-		disp(['MP285SetVelocity: MP285 returned an error:' num2str(out)]);
+		disp(['mp285SetVelocity: mp285 returned an error:' num2str(out)]);
 		out=1;
 		return
 	end

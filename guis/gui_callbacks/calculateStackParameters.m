@@ -33,7 +33,7 @@ function calculateStackParameters
 	state.acq.numberOfZSlices=max(ceil((abs(zStop-zStart))/step),1); %TNMOD
 	updateGuiByGlobal('state.acq.numberOfZSlices');
 
-	preallocateMemory;
+	siSession_allocateMemory;
 
 
 	

@@ -19,7 +19,7 @@ function closeConfigurationGUI
 	if state.internal.configurationChanged 
 		recordWindowPositions;
         siSession_setup(1); % force flag set to 1
-        siFigures_resetVisible
+        siFigures_make;
     end
 	state.internal.configurationChanged=0;
 

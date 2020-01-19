@@ -16,6 +16,16 @@ function siFigures_make
 	
     channelList=[1:state.imaging.daq.maximumNumberOfInputChannels 11:10+state.imaging.daq.maximumNumberOfInputChannels];
     
+    if isfield(state.imaging.internal, 'figureHandle')
+        if iscell(state.imaging.internal.figureHandle)
+            for counter=1:length(state.imaging.internal.figureHandle)
+                if ishandle(state.imaging.internal.figureHandle{counter})
+                    delete(state.imaging.internal.figureHandle{counter})
+                end
+            end
+        end
+    end
+    
     state.imaging.internal.figureHandle=cell(length(channelList), 1);
     state.imaging.internal.axisHandle=cell(length(channelList), state.internal.numberOfStripes);
     state.imaging.internal.imageHandle=cell(length(channelList), state.internal.numberOfStripes);

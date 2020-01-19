@@ -48,9 +48,9 @@ function executeGrabOneStackCallback(h)
 
 
 		if strcmp(get(gh.siGUI_ImagingControls.grabOneButton, 'String'), 'GRAB')		% BSMOD2 eliminated variable 'val'
-			MP285SetVelocity(state.motor.velocityFast);
+			mp285SetVelocity(state.motor.velocityFast);
 			setMotorPosition(state.motor.stackStart);
-			MP285SetVelocity(state.motor.velocitySlow);
+			mp285SetVelocity(state.motor.velocitySlow);
 			updateRelativeMotorPosition;
 			executeGrabOneCallback;
 		else

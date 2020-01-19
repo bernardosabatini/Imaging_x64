@@ -26,12 +26,12 @@ function gotoPosition(pos)
 	end
 	
 	setStatusString(['Moving to position #' num2str(pos)]);
-	MP285SetVelocity(state.motor.velocityFast);
+	mp285SetVelocity(state.motor.velocityFast);
 	state.motor.absXPosition=state.motor.positionVectors(pos,1);
 	state.motor.absYPosition=state.motor.positionVectors(pos,2);
 	state.motor.absZPosition=state.motor.positionVectors(pos,3);
 	setMotorPosition;
 	updateRelativeMotorPosition;
-	MP285SetVelocity(state.motor.velocitySlow);
+	mp285SetVelocity(state.motor.velocitySlow);
 	disp(['*** Staged moved to position #' num2str(pos) ' ***']);
 	setStatusString('');
