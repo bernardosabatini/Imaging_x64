@@ -7,12 +7,12 @@ function out=mp285Talk(in, verbose)
 	end
 
 	if nargin < 1
- 	    disp(['MP285Talk: expect string argument to send to MP285 via serial port']);
+ 	    disp(['mp285Talk: expect string argument to send to mp285 via serial port']);
 		return	
 	end 
 
 	if length(state.motor.serialPortHandle) == 0
-		disp(['MP285Talk: MP285 not configured']);
+		disp(['mp285Talk: mp285 not configured']);
 		return;
 	end
  
@@ -25,26 +25,26 @@ function out=mp285Talk(in, verbose)
 		temp=fread(state.motor.serialPortHandle,n); 
 		if verbose
 			temp=char(reshape(temp,1,length(temp)));
-			disp(['MP285Talk: [' num2str(double(temp)) '] = ' temp(1:end-1) ...
-					' flushed from MP285 serial port buffer']);
+			disp(['mp285Talk: [' num2str(double(temp)) '] = ' temp(1:end-1) ...
+					' flushed from mp285 serial port buffer']);
 		end
 	end
 
 	fwrite(state.motor.serialPortHandle, [in 13]);
 	if verbose 
-		disp(['MP285Talk: [' num2str(double(in)) ' CR] sent to MP285. ']);	
+		disp(['mp285Talk: [' num2str(double(in)) ' CR] sent to mp285. ']);	
 	end
 	
 	temp=mp285ReadAnswer;
 	temp=reshape(temp,1,length(temp));
 	if length(temp)==0
-		disp('MP285Talk: MP285 Timed out without returning anything');
+		disp('mp285Talk: mp285 Timed out without returning anything');
 	else
 		if length(temp)>1 | temp(1)~=13
-			disp(['MP285Talk: MP285 did not return 13']);
+			disp(['mp285Talk: mp285 did not return 13']);
 		end
 		if verbose
-			disp(['MP285Talk: MP285 returned [' num2str(double(temp)) '] = ' char(temp(1:end-1))]);
+			disp(['mp285Talk: mp285 returned [' num2str(double(temp)) '] = ' char(temp(1:end-1))]);
 		end
 	end
 	out=temp;

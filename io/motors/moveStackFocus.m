@@ -20,6 +20,6 @@ global state
 
 	oldStatus=state.internal.statusString;
 	setStatusString('Moving stage...');
-	MP285SetPos(newPos, [], 0);
+	mp285SetPos(newPos, [], 0);
 	setStatusString(oldStatus);
 	

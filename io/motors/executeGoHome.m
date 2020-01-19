@@ -20,9 +20,9 @@ function moved=executeGoHome
 				state.motor.absXPosition=state.internal.initialMotorPosition(1);
 				state.motor.absYPosition=state.internal.initialMotorPosition(2);
 				state.motor.absZPosition=state.internal.initialMotorPosition(3);
-				MP285SetVelocity(state.motor.velocityFast);
+				mp285SetVelocity(state.motor.velocityFast);
 				setMotorPosition;
-				MP285SetVelocity(state.motor.velocitySlow);
+				mp285SetVelocity(state.motor.velocitySlow);
 				updateRelativeMotorPosition;
 				moved=1;
 				setStatusString('');

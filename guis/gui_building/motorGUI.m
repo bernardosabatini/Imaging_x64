@@ -104,7 +104,7 @@ function varargout = setZeroXYButton_Callback(h, eventdata, handles, varargin)
 	turnOffMotorButtons;
 	flag=updateMotorPosition;
 	if isempty(flag)
-		disp('setZeroXYButton_Callback : Unable to zero XY.  MP285 Error');
+		disp('setZeroXYButton_Callback : Unable to zero XY.  mp285 Error');
 		beep;
 	else
 		state.motor.offsetX=state.motor.absXPosition;
@@ -121,7 +121,7 @@ function varargout = setZeroXYZButton_Callback(h, eventdata, handles, varargin)
 	turnOffMotorButtons;
 	flag=updateMotorPosition;
 	if isempty(flag)
-		disp('setZeroXYZButton_Callback : Unable to zero XYZ.  MP285 Error');
+		disp('setZeroXYZButton_Callback : Unable to zero XYZ.  mp285 Error');
 		beep;
 	else
 		state.motor.offsetX=state.motor.absXPosition;
@@ -139,7 +139,7 @@ function varargout = setZeroZButton_Callback(h, eventdata, handles, varargin)
 	turnOffMotorButtons;
 	flag=updateMotorPosition;
 	if isempty(flag)
-		disp('setZeroZButton_Callback : Unable to zero Z.  MP285 Error');
+		disp('setZeroZButton_Callback : Unable to zero Z.  mp285 Error');
 		beep;
 	else
 		state.motor.offsetZ=state.motor.absZPosition;
@@ -198,7 +198,7 @@ function varargout = setStackStart_Callback(h, eventdata, handles, varargin)
 	else
 		flag=updateMotorPosition;
 		if isempty(flag)
-			disp('setStackStart_Callback : Unable to set stack start.  MP285 Error');
+			disp('setStackStart_Callback : Unable to set stack start.  mp285 Error');
 			beep;
 		else
 			state.motor.stackStart=state.motor.lastPositionRead;
@@ -221,7 +221,7 @@ function varargout = setStackStop_Callback(h, eventdata, handles, varargin)
 	else
 		flag=updateMotorPosition;
 		if isempty(flag)
-			disp('setStackStop_Callback : Unable to set stack end.  MP285 Error');
+			disp('setStackStop_Callback : Unable to set stack end.  mp285 Error');
 			beep;
 		else
 			state.motor.stackStop=state.motor.lastPositionRead;

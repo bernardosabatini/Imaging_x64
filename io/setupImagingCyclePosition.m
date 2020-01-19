@@ -71,7 +71,7 @@ function setupImagingCyclePosition
 	end
 
 	if needToAllocate
-		preallocateMemory;
+		siSession_allocateMemory;
 	end
 
 	if redo

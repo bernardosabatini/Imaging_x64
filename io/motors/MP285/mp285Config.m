@@ -1,12 +1,12 @@
-function out=MP285Config(motorNumber)
+function out=mp285Config(motorNumber)
 if nargin<1 
     motorNumber=1;
 end
 
-% MP285Config configures the serial port for the MP285 Sutter controler
+% mp285Config configures the serial port for the mp285 Sutter controler
 % 
-% MP285Config sets up the serial port (given by sPort, i.e. 'COM2') for communication with 
-% Sutter's MP285 stepper motor controller. 
+% mp285Config sets up the serial port (given by sPort, i.e. 'COM2') for communication with 
+% Sutter's mp285 stepper motor controller. 
 % 
 % Class Support
 %   -------------
@@ -31,7 +31,7 @@ end
 	end
 
 	if state.motor.port ~= 'COM1' & state.motor.port ~= 'COM2'
-		disp(['MP285Config:  Serial port set to ' state.motor.port '?  Will use defualt COM2.']);
+		disp(['mp285Config:  Serial port set to ' state.motor.port '?  Will use defualt COM2.']);
 		state.motor.port='COM2';
 	end
 
@@ -44,16 +44,16 @@ end
 		clear port;
 	end
 
-% make serial object named 'MP285'
+% make serial object named 'mp285'
 	state.motor.serialPortHandle = serial(state.motor.port);
 	set(state.motor.serialPortHandle, 'BaudRate', state.motor.baud, 'Parity', 'none' , 'Terminator', 'CR', ...
-		'StopBits', 1, 'Timeout', state.motor.timeout, 'Name', 'MP285');
+		'StopBits', 1, 'Timeout', state.motor.timeout, 'Name', 'mp285');
 
 % open and check status 
 	fopen(state.motor.serialPortHandle);
 	stat=get(state.motor.serialPortHandle, 'Status');
 	if ~strcmp(stat, 'open')
-		disp([' MP285Config: trouble opening port; cannot to proceed']);
+		disp([' mp285Config: trouble opening port; cannot to proceed']);
 		state.motor.serialPortHandle=[];
 		out=1;
 		return;

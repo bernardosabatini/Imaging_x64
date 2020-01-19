@@ -2,7 +2,7 @@ function startSetMotorPosition(newPos)
 global state
 
 % setMotorPosition.m****
-% Function that updates the MP285 motor position with the global state.motor.absXPosition
+% Function that updates the mp285 motor position with the global state.motor.absXPosition
 %
 % Written By: Thomas Pologruto
 % Modified: Bernardo Sabatini 1/12/1 - combined set[X,Y,Z]MotorPosition functions into this one
@@ -25,5 +25,5 @@ global state
 
 	oldStatus=state.internal.statusString;
 	setStatusString('Moving stage...');
-	MP285StartMove(newPos);
+	mp285StartMove(newPos);
 	setStatusString(oldStatus);

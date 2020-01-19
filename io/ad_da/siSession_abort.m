@@ -50,6 +50,10 @@ function siSession_abort
 	set(gh.siGUI_ImagingControls.focusButton, 'String', 'FOCUS');
 	set(gh.siGUI_ImagingControls.focusButton, 'Visible', 'On');
 	set(gh.siGUI_ImagingControls.focusButton, 'Enable', 'on');
+    set(gh.fieldAdjustGUI.focusButton, 'String', 'FOCUS');
+	set(gh.fieldAdjustGUI.focusButton, 'Visible', 'On');
+	set(gh.fieldAdjustGUI.focusButton, 'Enable', 'on');
+
     turnOnMenus
     timerReleasePause('Imaging')
     
