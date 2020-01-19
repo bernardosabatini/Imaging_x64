@@ -22,8 +22,12 @@ function siListener_grabStripe(~, event)
 
 % Write complete header string  for only the first frame
 	
-	stripeData = event.Data; 
-       
+    if state.imaging.daq.invertInput
+    	stripeData = -1*event.Data;
+    else
+        stripeData = event.Data;
+    end   
+    
     if state.internal.abortActionFunctions
         siSession_abort
         return
