@@ -68,9 +68,9 @@ function siListener_grabStripe(~, event)
 			else
 				framePosition = state.internal.frameCounter;
 			end
-		end
-		
-		global lastAcquiredFrame
+        end
+        
+        global lastAcquiredFrame
 		for channel=find(state.acq.acquiringChannel)
 			imageData{channel}(:,:,framePosition)=lastAcquiredFrame{channel}(:,:);
 			if state.acq.dualLaserMode==2
