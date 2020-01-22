@@ -2,7 +2,7 @@ function moveStackFocus
 global state
 
 % decrementZPosition.m*****
-% function that will decrement the Z position by state.motor.zStepSize and update the abs and relative
+% function that will decrement the Z position by zStepSize and update the abs and relative
 % positions.
 %
 % Written By: Thomas Pologruto
