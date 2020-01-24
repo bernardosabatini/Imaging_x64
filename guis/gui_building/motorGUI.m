@@ -3,7 +3,7 @@ function varargout = motorGUI(varargin)
 %    FIG = MOTORGUI launch motorGUI GUI.
 %    MOTORGUI('callback_name', ...) invoke the named callback.
 
-% Last Modified by GUIDE v2.0 26-Apr-2001 15:50:39
+% Last Modified by GUIDE v2.5 24-Jan-2020 15:39:09
 
 if nargin == 0  % LAUNCH GUI
 
@@ -82,9 +82,6 @@ function varargout = relPos_Callback(h, eventdata, handles, varargin)
 	turnOffMotorButtons;
 	genericCallback(h);
 	moveToRelativePosition;
-	if state.piezo.usePiezo
-		piezoUpdatePosition;
-	end
 	turnOnMotorButtons;
 
 % --------------------------------------------------------------------
