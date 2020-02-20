@@ -24,8 +24,8 @@ function siProcessImageStripe(stripeData, averaging)
 	channelList=find(state.acq.acquiringChannel);
 	startLine = 1 + state.acq.linesPerFrame/state.internal.numberOfStripes*state.internal.stripeCounter;
 	stopLine = startLine + state.acq.linesPerFrame/state.internal.numberOfStripes - 1;
-	[state.internal.stripeCounter startLine stopLine]
-	for channelCounter = 1:length(channelList)
+
+    for channelCounter = 1:length(channelList)
 		channel=channelList(channelCounter);
 		if state.acq.acquiringChannel(channel)  % are we acquiring data on this channel?
 			if state.acq.(['pmtOffsetAutoSubtractChannel' num2str(channelCounter)])
