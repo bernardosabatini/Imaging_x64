@@ -35,7 +35,7 @@ function siListener_focusStripe(~, event)
     else
         stripeData = event.Data;
     end        
-    round(1000*mean(stripeData))
+  %  round(1000*mean(stripeData))
     
 	siProcessImageStripe(stripeData, 0);
 	

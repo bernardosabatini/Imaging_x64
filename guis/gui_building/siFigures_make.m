@@ -6,7 +6,7 @@ function siFigures_make
 	startImageData = int16(zeros(state.internal.linesPerStripe, state.acq.pixelsPerLine));
 	axisYStep=1/state.internal.numberOfStripes;
     
-    axisPosition = [0 1-axisYStep 1 .125];
+    axisPosition = [0 1-axisYStep 1 axisYStep];
     axisOffset = [0 axisYStep 0 0];
 	aspectRatio = (state.internal.imageAspectRatioBias*state.acq.scanAmplitudeY/state.acq.scanAmplitudeX); % /(state.acq.linesPerFrame/state.acq.pixelsPerLine);
 	

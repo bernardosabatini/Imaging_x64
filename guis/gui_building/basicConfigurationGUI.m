@@ -178,6 +178,7 @@ function outputRate_CreateFcn(hObject, eventdata, handles)
 
 function outputRate_Callback(hObject, eventdata, handles)
 	genericCallback(hObject);
+    state.internal.configurationMajorChange=1;
 	state.internal.configurationChanged=1;
 	state.internal.configurationNeedsSaving=1;
 	siApplyDAQSampleRates
@@ -191,6 +192,7 @@ function inputRate_CreateFcn(hObject, eventdata, handles)
 function inputRate_Callback(hObject, eventdata, handles)
 	genericCallback(hObject);
 	global state
+    state.internal.configurationMajorChange=1;    
 	state.internal.configurationChanged=1;
 	state.internal.configurationNeedsSaving=1;
 	siApplyDAQSampleRates

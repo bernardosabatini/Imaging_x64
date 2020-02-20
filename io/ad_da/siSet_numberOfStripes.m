@@ -14,7 +14,9 @@ maxStripes=round((state.acq.msPerLine*state.acq.linesPerFrame/60)); %update at m
 
 validI=find(allF<=maxStripes);
 
+state.internal.oldNumberOfStripes=state.internal.numberOfStripes;
 state.internal.numberOfStripes=allF(validI(end));
+state.internal.numberOfStripes=16;
 state.internal.linesPerStripe=state.acq.linesPerFrame/state.internal.numberOfStripes;
 
 
