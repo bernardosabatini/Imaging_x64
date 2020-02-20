@@ -5,9 +5,9 @@ if nargin<1
 end
 
 global state
-mp285SetVelocity(state.motor.velocityFast*25)
+mp285SetVelocity(state.motor.velocityFast*5);
 
-updateMotorPosition
+updateMotorPosition;
 state.motor.absZPosition = state.motor.absZPosition + mm*1000; % Calcualte New value
 
 newPos(1,1) = state.motor.absXPosition;		% Set X Position to new value
@@ -19,7 +19,7 @@ setStatusString('Moving stage...');
 
 mp285StartMove(newPos);
 setStatusString(oldStatus);
-mp285FinishMove
-mp285SetVelocity(state.motor.velocitySlow)
-updateMotorPosition
+mp285FinishMove;
+mp285SetVelocity(state.motor.velocitySlow);
+updateMotorPosition;
 
