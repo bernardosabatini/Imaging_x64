@@ -29,7 +29,7 @@ function siMaxProjections_calcAndSave
 				end
 			end
 			% Displays the current Max images on the screen as they are acquired.
-			set(state.internal.maximagehandle(channel), 'EraseMode', 'none', 'CData', ...
+			set(state.imaging.internal.maxImageHandle{channel, 1}, 'CData', ...
 				projectionData{channel});
 		end
 		

@@ -26,9 +26,12 @@ function closeConfigurationGUI
         siSession_prepareOutput(1)
         siSession_set_mode('focus', 1)
         siSession_allocateMemory
-    
-        siFigures_make
-        siFigures_resetVisible
+        if state.internal.numberOfStripes==state.internal.oldNumberOfStripes
+            siFigures_reDimension;
+        else
+            siFigures_make
+            siFigures_resetVisible
+        end
         siFigures_updateCLim
     end
 	state.internal.configurationChanged=0;
