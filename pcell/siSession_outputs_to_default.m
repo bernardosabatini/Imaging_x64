@@ -1,4 +1,4 @@
-function siSession_outputs_to_default
+function siSession_outputs_to_default(parkXY)
 % siSession_outputs_to_default: Outputs voltages to park the mirrors, put
 % the pcells to default, and close the shutters
 
@@ -13,7 +13,12 @@ function siSession_outputs_to_default
     end
     
     
-    dataOut= [state.acq.scanOffsetX state.acq.scanOffsetY];
+    if nargin<1
+        dataOut= [state.acq.scanOffsetX state.acq.scanOffsetY];
+    else
+        dataOut=parkXY;
+    end
+    
     if state.pcell.pcellOn
         dataOutPcell=zeros(1, state.pcell.numberOfPcells);
         for counter=1:state.pcell.numberOfPcells
